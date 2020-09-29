@@ -1,4 +1,5 @@
 ﻿using System;
+using TodoItApp.Model;
 
 namespace TodoItApp
 {
@@ -7,6 +8,9 @@ namespace TodoItApp
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Person p;
+
+
         }
     }
 }
