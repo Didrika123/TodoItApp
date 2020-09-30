@@ -6,23 +6,48 @@ namespace TodoItApp.Tests
 {
     public class PersonTest
     {
-        [Fact]
-        public void NameNotNull()
+        [Theory]
+        [InlineData(null, "GoodName")]
+        [InlineData("", "GoodName")]
+        [InlineData("  ", "GoodName")]
+        [InlineData("GoodName", null)]
+        [InlineData("GoodName", "")]
+        [InlineData("GoodName", "  ")]
+        public void BadNameConstructor(string firstName, string lastName)
         {
             //Arrange
-            string firstName = "Kalle";
-            string lastName = "Anka";
-            Person aPerson = new Person(294, firstName, lastName);
+            int personId = 215;
 
-            //Act
-            aPerson.LastName = "";
-            aPerson.LastName = null;
-            aPerson.FirstName = "";
-            aPerson.FirstName = null;
+            //Act & assert
+            Assert.Throws<ArgumentException>(() => new Person(personId, firstName, lastName));
+        }
 
-            //Assert
-            Assert.Equal(firstName, aPerson.FirstName);
-            Assert.Equal(lastName, aPerson.LastName);
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        public void BadFirstNameProperty(string firstName)
+        {
+            //Arrange
+            int goodId = 0;
+            Person aPerson = new Person(goodId, "GoodName", "GoodName");
+
+            //Act & assert
+            Assert.Throws<ArgumentException>(() => aPerson.FirstName = firstName);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        public void BadLastNameProperty(string lastName)
+        {
+            //Arrange
+            int goodId = 0;
+            Person aPerson = new Person(goodId, "GoodName", "GoodName");
+
+            //Act & assert
+            Assert.Throws<ArgumentException>(() => aPerson.LastName = lastName);
         }
     }
 }

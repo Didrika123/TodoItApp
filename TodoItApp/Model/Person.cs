@@ -19,8 +19,9 @@ namespace TodoItApp.Model
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    firstName = value;
+                    throw new ArgumentException("First Name cannot be empty.");
                 }
+                firstName = value;
             }
         }
         public string LastName
@@ -30,8 +31,9 @@ namespace TodoItApp.Model
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    lastName = value;
+                    throw new ArgumentException("Last Name cannot be empty.");
                 }
+                lastName = value;
             }
         }
 
@@ -40,7 +42,7 @@ namespace TodoItApp.Model
         {
             this.personId = personId;
             this.FirstName = firstName;
-            this.LastName = lastName;
+            this.LastName = lastName; //GOOD!!
         }
     }
 }
