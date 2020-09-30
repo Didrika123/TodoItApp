@@ -7,9 +7,9 @@ namespace TodoItApp.Model
     public class Person
     {
         // fields
-        private readonly int personId;
-        private string firstName = "John";
-        private string lastName = "Doe";
+        readonly int personId;
+        string firstName = "John";
+        string lastName = "Doe";
 
         // Properties
         public string FirstName
@@ -42,7 +42,7 @@ namespace TodoItApp.Model
         {
             this.personId = personId;
             this.FirstName = firstName;
-            this.LastName = lastName; //GOOD!!
+            this.LastName = lastName; 
         }
     }
 }
