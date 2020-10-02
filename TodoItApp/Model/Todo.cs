@@ -7,11 +7,17 @@ namespace TodoItApp.Model
     public class Todo
     {
         readonly int todoId;
-
         string description;
         bool done;
         Person assignee;
 
+        public int TodoId
+        {
+            get
+            {
+                return todoId;
+            }
+        }
         public string Description
         {
             get

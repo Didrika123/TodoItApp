@@ -5,6 +5,9 @@ using Xunit;
 using TodoItApp.Data;
 using TodoItApp.Model;
 
+//Because we have a static array field that we use it can mess up tests if they run in parallel, so lets disable parallel test running :O
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
+
 namespace TodoItApp.Tests
 {
     public class PeopleTest
