@@ -12,6 +12,13 @@ namespace TodoItApp.Model
         string lastName = "Doe";
 
         // Properties
+        public int PersonId 
+        {
+            get
+            {
+                return personId;
+            }
+        }
         public string FirstName
         {
             get { return firstName; }

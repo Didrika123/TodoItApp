@@ -7,10 +7,19 @@ namespace TodoItApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Person p;
 
 
+            Person[] personArray = new Person[3];
+            personArray[0] = new Person(123, "Kalle", "Karlsson");
+            personArray[1] = new Person(321, "Niklas", "Borjeson");
+            personArray[2] = new Person(444, "Gustav", "Areaa");
+
+            foreach (Person person in personArray)
+            {
+                Console.WriteLine(person.FirstName);
+            }
+            Console.ReadLine();
         }
     }
 }
