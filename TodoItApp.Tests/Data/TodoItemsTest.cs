@@ -113,5 +113,80 @@ namespace TodoItApp.Tests.Data
             Assert.Equal(expectedSize, findAllArraySizeAfterClear);
 
         }
+
+
+        //Assignment Step 10 Below this comment
+
+        [Fact]
+        public void FindByDoneStatus()
+        {
+            // Arrange
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+            todoItems.CreateTodo("A description"); 
+            todoItems.CreateTodo("Another description"); 
+            Todo[] allTodos = todoItems.FindAll();
+
+            // Act
+            allTodos[0].Done = true;
+            allTodos[1].Done = false;
+            Todo[] doneTodos = todoItems.FindByDoneStatus(true);
+            Todo[] notDoneTodos = todoItems.FindByDoneStatus(false);
+
+
+            // Assert
+            Assert.Equal(allTodos[0], doneTodos[0]);
+            Assert.Equal(allTodos[1], notDoneTodos[0]);
+
+            // check so there is (1 done) and (1 NOT done)
+            Assert.Single(doneTodos);
+            Assert.Single(notDoneTodos);
+        }
+
+
+        [Fact]
+        public void FindByAssignee()
+        {
+            // Arrange
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+            todoItems.CreateTodo("A description");
+            todoItems.CreateTodo("Another description");
+            Todo[] allTodos = todoItems.FindAll();
+
+            // Act
+            Person person = new Person(12, "Kalle", "Anka");
+            allTodos[1].Assignee = person;
+            Todo[] assignedTodos = todoItems.FindByAssignee(person); // 2 Birds with 1 stone: findbyassigne(person) calls findbyassigne(personid)
+
+            // Assert
+            Assert.Equal(allTodos[1], assignedTodos[0]);
+
+            Assert.Single(assignedTodos);
+        }
+
+
+        [Fact]
+        public void FindUnassignedTodos()
+        {
+            // Arrange
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+            todoItems.CreateTodo("A description");
+            todoItems.CreateTodo("Another description");
+            todoItems.CreateTodo("Anothers description");
+            Todo[] allTodos = todoItems.FindAll();
+
+            // Act
+            Person person = new Person(12, "Kalle", "Anka");
+            allTodos[0].Assignee = person;
+            allTodos[1].Assignee = person;
+            Todo[] unassignedTodos = todoItems.FindUnassignedTodoItems();
+
+            // Assert
+            Assert.Equal(allTodos[2], unassignedTodos[0]);
+
+            Assert.Single(unassignedTodos);
+        }
     }
 }

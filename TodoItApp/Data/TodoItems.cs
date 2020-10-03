@@ -44,6 +44,35 @@ namespace TodoItApp.Data
         {
             todoArray = new Todo[0];
         }
-        
+
+        //Assignment Step 10 Below this comment
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            Todo[] result = new Todo[0];
+            foreach (var item in todoArray)
+            {
+                if (item.Done == doneStatus)
+                {
+                    Array.Resize<Todo>(ref result, result.Length + 1);
+                    result[^1] = item;  // Wow an index operator!
+                    //result[result.Length - 1] = item;
+                }
+            }
+            return result;
+
+            //return Array.FindAll(todoArray, n => n.Done == doneStatus);
+        }
+        public Todo[] FindByAssignee(int personId)
+        {
+            return Array.FindAll(todoArray, n => n.Assignee != null && n.Assignee.PersonId == personId);
+        }
+        public Todo[] FindByAssignee(Person assignee)
+        {
+            return FindByAssignee(assignee.PersonId);
+        }
+        public Todo[] FindUnassignedTodoItems()
+        {
+            return Array.FindAll(todoArray, n => n.Assignee == null);
+        }
     }
 }
