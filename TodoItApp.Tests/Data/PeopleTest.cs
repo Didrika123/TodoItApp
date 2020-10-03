@@ -123,5 +123,65 @@ namespace TodoItApp.Tests
             Assert.Equal(expectedSize, findAllArraySizeAfterClear);
 
         }
+
+
+        //Assignment Step 11 Below this comment
+
+        [Fact]
+        public void RemovePerson()
+        {
+            // Arrange
+            People people = new People();
+            people.Clear();
+            people.CreatePerson("Kalle", "Planka");
+            people.CreatePerson("Marley", "Moster");
+            people.CreatePerson("Michael", "Kennedy");
+            Person[] allPersons = people.FindAll();
+
+            // Act
+            people.RemovePerson(allPersons[^1]);
+            people.RemovePerson(allPersons[0]);
+            allPersons = people.FindAll();
+
+            // Assert
+            Assert.Equal("Marley", allPersons[0].FirstName);
+
+            Assert.Single(allPersons);
+        }
+
+        // Bonus test
+        [Fact]
+        public void RemovePerson_AlsoClearsAssignees()
+        {
+            // Arrange
+            People people = new People();
+            people.Clear();
+            people.CreatePerson("Kalle", "Planka");
+            people.CreatePerson("Marley", "Moster");
+            people.CreatePerson("Michael", "Kennedy");
+            Person[] allPersons = people.FindAll();
+
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+            todoItems.CreateTodo("A description");
+            todoItems.CreateTodo("Another description");
+            todoItems.CreateTodo("Good description");
+            Todo[] allTodos = todoItems.FindAll();
+
+            // Act
+            allTodos[0].Assignee = allPersons[0];
+            allTodos[1].Assignee = allPersons[1];
+            allTodos[2].Assignee = allPersons[2];
+            people.RemovePerson(allPersons[^1]);
+            people.RemovePerson(allPersons[0]);
+            allPersons = people.FindAll();
+
+            // Assert
+            Assert.Null(allTodos[0].Assignee);
+            Assert.Equal(allTodos[1].Assignee, allPersons[0]);
+            Assert.Null(allTodos[2].Assignee);
+
+            Assert.Single(allPersons);
+        }
     }
 }

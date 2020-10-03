@@ -45,5 +45,22 @@ namespace TodoItApp.Data
         {
             personArray = new Person[0];
         }
+
+
+        //Assignment Step 11 Below this comment
+
+        public void RemovePerson(Person person)
+        {
+            for (int i = 0; i < personArray.Length; i++)
+            {
+                if (personArray[i] == person)
+                {
+                    personArray[i] = personArray[personArray.Length - 1]; //Move last element to the index of the one to be removed.
+                    Array.Resize<Person>(ref personArray, personArray.Length - 1); //Remove the last item 
+                }
+            }
+
+            TodoItems.RemoveAssignee(person); // Bonus method, read comment on the bottom of the class TodoItems
+        }
     }
 }

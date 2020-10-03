@@ -188,5 +188,30 @@ namespace TodoItApp.Tests.Data
 
             Assert.Single(unassignedTodos);
         }
+
+
+        //Assignment Step 11 Below this comment
+
+        [Fact]
+        public void RemoveTodo()
+        {
+            // Arrange
+            TodoItems todoItems = new TodoItems();
+            todoItems.Clear();
+            todoItems.CreateTodo("A description");
+            todoItems.CreateTodo("Another description");
+            todoItems.CreateTodo("Good description");
+            Todo[] allTodos = todoItems.FindAll();
+
+            // Act
+            todoItems.RemoveTodo(allTodos[^1]);
+            todoItems.RemoveTodo(allTodos[0]);
+            allTodos = todoItems.FindAll();
+
+            // Assert
+            Assert.Equal("Another description", allTodos[0].Description);
+
+            Assert.Single(allTodos);
+        }
     }
 }
