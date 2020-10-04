@@ -60,7 +60,6 @@ namespace TodoItApp.Data
                 }
             }
 
-            TodoItems.RemoveAssignee(person); // Bonus method, read comment on the bottom of the class TodoItems
         }
     }
 }

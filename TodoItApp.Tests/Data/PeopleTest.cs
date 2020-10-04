@@ -151,7 +151,7 @@ namespace TodoItApp.Tests
 
         // Bonus test
         [Fact]
-        public void RemovePerson_AlsoClearsAssignees()
+        public void RemovePersonAndClearAssignees()
         {
             // Arrange
             People people = new People();
@@ -173,7 +173,9 @@ namespace TodoItApp.Tests
             allTodos[1].Assignee = allPersons[1];
             allTodos[2].Assignee = allPersons[2];
             people.RemovePerson(allPersons[^1]);
+            todoItems.RemoveAssignee(allPersons[^1]);
             people.RemovePerson(allPersons[0]);
+            todoItems.RemoveAssignee(allPersons[0]);
             allPersons = people.FindAll();
 
             // Assert

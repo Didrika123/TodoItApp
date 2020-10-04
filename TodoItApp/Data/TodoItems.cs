@@ -91,43 +91,9 @@ namespace TodoItApp.Data
 
             //todoArray = Array.FindAll<Todo>(todoArray, n => n != todo);
         }
-        /*
-         A SIDE NOTE
 
-         We might want to clear assigness when removing Persons from the system, Solutions:
-
-         1. static RemoveAssigne() in this class which is called from the remove method of the people class 
-
-         2. Maybe a better solution would be a wrapper with People & Todoitems that handles clearing a person (From both TodoItems:assignees & People)
-
-         3. You check inside the Todo class Property of assignee(the get method) you add a check that checks if the assignee exists in People
-
-         4. You check here every time you use assignee if that assigne is present in the people class
-
-         5. You dont clear assignees at all and let them reference a person that isnt present inside People
-
-         6. An option I'm unaware of that is superior to all other?
-
-
-         - I believe - 
-
-         Option 3, 4 are bad because it introduces some ugly dependencies. Why? Because they don't have any relation to the People class.
-         Option 1 is bad because ugly dependency too, because the People class have no relation to the TodoItems class (this class)
-
-         Option 2 is the best option if you want the functionality that assignees are to be cleared upon removal of a person from the system. Since it doesnt introduce weird relations.
-         Option 5 is the best option if you DONT want the functionality that assingees are cleared upon removal of person from the system
-         
-
-         - Conclusion -
-         Since the assignments states that we shouldnt add extra things I just picked the easiest option to implement: 
-         Option: Nr 5, we assume the intended functionality is that asignees are not cleared upon removal of person.
-
-         - Bonus -
-
-         I implemented option 1 below.
-
-        */
-        public static void RemoveAssignee(Person assignee)
+        // Option 7: I implement the functionality, but hand over the responsibility to the outside world
+        public void RemoveAssignee(Person assignee)
         {
             foreach (var item in todoArray)
             {
