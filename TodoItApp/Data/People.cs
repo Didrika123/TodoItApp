@@ -51,15 +51,12 @@ namespace TodoItApp.Data
 
         public void RemovePerson(Person person)
         {
-            for (int i = 0; i < personArray.Length; i++)
+            int index = Array.IndexOf(personArray, person);
+            if(index >= 0)
             {
-                if (personArray[i] == person)
-                {
-                    personArray[i] = personArray[personArray.Length - 1]; //Move last element to the index of the one to be removed.
-                    Array.Resize<Person>(ref personArray, personArray.Length - 1); //Remove the last item 
-                }
+                personArray[index] = personArray[^1]; //Move last item to the place of the one we want to delete
+                Array.Resize<Person>(ref personArray, personArray.Length - 1); //Remove the last item 
             }
-
         }
     }
 }
